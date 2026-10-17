@@ -33,9 +33,19 @@ app.get('/api/users', (req, res) =>
     { id: 2, name: 'Bob' },
   ]),
 );
+
+
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', client.register.contentType);
   res.end(await client.register.metrics());
+});
+
+app.get('/api/info', (req, res) => {
+  res.status(200).json({
+    name: 'DevSecOps Demo',
+    version: version,
+    environment: environment,
+  });
 });
 if (require.main === module) {
   const port = process.env.PORT || 3000;
